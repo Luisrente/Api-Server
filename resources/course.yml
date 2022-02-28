@@ -1,0 +1,15 @@
+createCourse:
+  handler: src/lambdas/Course/index.createCourse
+  events:
+    - http:
+        path: /course
+        method: POST
+        cors: true
+
+createCourseCategoriy:
+  handler: 
+  events:
+    - http:
+        path: /course
+        method: POST
+        cors: true                

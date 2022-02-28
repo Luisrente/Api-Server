@@ -1,0 +1,30 @@
+createUser:
+  handler: src/lambdas/user/index.createUser
+  events:
+    - http:
+        path: /user
+        method: POST
+        cors: true
+sendEmail:
+  handler: src/lambdas/email/index.sendEmail
+  events:
+    - http:
+        path: /send-email
+        method: POST
+        cors: true
+        authorizer:
+          name: auth
+          type: COGNITO_USER_POOLS
+          identitySource: method.request.header.AuthorizationToken
+          arn:
+            Fn::GetAtt:
+              - CognitoUserPool
+              - Arn
+
+getUserById:
+  handler: src/lambdas/user/index.getUser
+  events:
+    - http:
+        path: user/{ID}
+        method: GET
+        cors: true
